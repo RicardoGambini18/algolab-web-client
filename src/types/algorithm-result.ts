@@ -11,7 +11,7 @@ type AlgorithmMetric = {
 }
 
 type SubAlgorithmMetric = AlgorithmMetric & {
-  item_found_index?: number | null
+  item_found_position?: number | null
 }
 
 export interface AlgorithmResult<T = object> {
@@ -22,6 +22,6 @@ export interface AlgorithmResult<T = object> {
   item_found?: T | null
   data_structure: string
   metrics: AlgorithmMetric
-  item_found_index?: number | null
   sub_metrics?: SubAlgorithmMetric[]
+  item_found_position?: number | null
 }

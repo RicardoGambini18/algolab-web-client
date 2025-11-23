@@ -150,8 +150,9 @@ export const ResultCard = ({
                     >
                       <div className="text-sm font-medium text-slate-300 mb-2">
                         Búsqueda #{idx + 1}{' '}
-                        {typeof individualResult.item_found_index === 'number'
-                          ? `(Elemento #${individualResult.item_found_index + 1})`
+                        {typeof individualResult.item_found_position ===
+                        'number'
+                          ? `(Elemento #${individualResult.item_found_position})`
                           : '(Elemento no encontrado)'}
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-2 text-xs">

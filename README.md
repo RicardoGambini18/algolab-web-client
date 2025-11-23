@@ -149,13 +149,13 @@ Para que este frontend funcione correctamente, el backend debe implementar los s
   }
   sorted_data?: Movie[]  // Solo si include_result=true
   item_found?: Movie | null  // Solo para búsqueda
-  item_found_index?: number | null  // Solo para búsqueda
+  item_found_position?: number | null  // Solo para búsqueda
   needs_sort?: boolean
   sub_metrics?: Array<{  // Solo para búsqueda con múltiples películas
     time: number
     memory: number
     comparisons: number
-    item_found_index?: number | null
+    item_found_position?: number | null
   }>
 }
 ```

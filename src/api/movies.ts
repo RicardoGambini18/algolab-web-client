@@ -102,7 +102,7 @@ export const getSearchResults = async (input: GetSearchResultsInput) => {
       ...firstResult,
       sub_metrics: subResults.map((result) => ({
         ...result.metrics,
-        item_found_index: result.item_found_index,
+        item_found_position: result.item_found_position,
       })),
       metrics: {
         time: averageTime,
