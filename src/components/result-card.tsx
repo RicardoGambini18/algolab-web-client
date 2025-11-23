@@ -55,13 +55,18 @@ export const ResultCard = ({
     >
       <CardHeader>
         <div className="flex items-start justify-between">
-          <div className="flex items-start gap-3">
-            <div className="mt-1">{getRankIcon(index)}</div>
-            <div>
-              <CardTitle className="text-white mb-1">
-                {result.algorithm}
+          <div className="flex items-center gap-3">
+            <div>{getRankIcon(index)}</div>
+            <div className="flex-1">
+              <CardTitle className="text-white mb-0">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span>{result.algorithm}</span>
+                  <span className="text-slate-300 font-normal">•</span>
+                  <span className="text-slate-300 font-medium">
+                    {result.data_structure}
+                  </span>
+                </div>
               </CardTitle>
-              <p className="text-sm text-slate-400">{result.data_structure}</p>
             </div>
           </div>
           <Badge variant="outline" className="border-slate-600 text-slate-300">
