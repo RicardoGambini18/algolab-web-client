@@ -2,12 +2,14 @@ export enum Metric {
   TIME = 'time',
   MEMORY = 'memory',
   OPERATIONS = 'operations',
+  ITERATIONS = 'iterations',
 }
 
 type AlgorithmMetric = {
   time: number
   memory: number
   operations: number
+  iterations: number
 }
 
 type SubAlgorithmMetric = AlgorithmMetric & {

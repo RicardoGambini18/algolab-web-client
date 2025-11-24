@@ -98,6 +98,10 @@ export const getSearchResults = async (input: GetSearchResultsInput) => {
       subResults.reduce((acc, curr) => acc + curr.metrics.operations, 0) /
       subResults.length
 
+    const averageIterations =
+      subResults.reduce((acc, curr) => acc + curr.metrics.iterations, 0) /
+      subResults.length
+
     results.push({
       ...firstResult,
       sub_metrics: subResults.map((result) => ({
@@ -108,6 +112,7 @@ export const getSearchResults = async (input: GetSearchResultsInput) => {
         time: averageTime,
         memory: averageMemory,
         operations: averageOperations,
+        iterations: averageIterations,
       },
     })
   }

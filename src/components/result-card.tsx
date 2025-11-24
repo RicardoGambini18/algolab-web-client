@@ -75,7 +75,7 @@ export const ResultCard = ({
         </div>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
           <div className="glass-light bg-slate-900/30 p-4 rounded-lg flex flex-col justify-between">
             <p className="text-xs text-slate-400 mb-1">Elementos procesados</p>
             <p className="text-xl font-bold text-white">
@@ -90,6 +90,17 @@ export const ResultCard = ({
               {getMetricValue(
                 Metric.OPERATIONS,
                 Math.round(result.metrics.operations)
+              )}
+            </p>
+          </div>
+          <div className="glass-light bg-slate-900/30 p-4 rounded-lg flex flex-col justify-between">
+            <p className="text-xs text-slate-400 mb-1">
+              {getMetricLabel(Metric.ITERATIONS, hasSubMetrics)}
+            </p>
+            <p className="text-xl font-bold text-white">
+              {getMetricValue(
+                Metric.ITERATIONS,
+                Math.round(result.metrics.iterations)
               )}
             </p>
           </div>
@@ -155,7 +166,7 @@ export const ResultCard = ({
                           ? `(Elemento #${individualResult.item_found_position})`
                           : '(Elemento no encontrado)'}
                       </div>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-2 text-xs">
+                      <div className="grid grid-cols-1 md:grid-cols-4 gap-2 text-xs">
                         <div>
                           <span className="text-slate-500">
                             {getMetricLabel(Metric.OPERATIONS)}:
@@ -164,6 +175,17 @@ export const ResultCard = ({
                             {getMetricValue(
                               Metric.OPERATIONS,
                               Math.round(individualResult.operations)
+                            )}
+                          </span>
+                        </div>
+                        <div>
+                          <span className="text-slate-500">
+                            {getMetricLabel(Metric.ITERATIONS)}:
+                          </span>
+                          <span className="text-slate-300 ml-1">
+                            {getMetricValue(
+                              Metric.ITERATIONS,
+                              Math.round(individualResult.iterations)
                             )}
                           </span>
                         </div>

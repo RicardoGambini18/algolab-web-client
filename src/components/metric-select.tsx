@@ -23,6 +23,9 @@ export const getMetricLabel = (metric: Metric, isAverage = false) => {
     [Metric.OPERATIONS]: isAverage
       ? 'Número de operaciones promedio'
       : 'Número de operaciones',
+    [Metric.ITERATIONS]: isAverage
+      ? 'Número de iteraciones promedio'
+      : 'Número de iteraciones',
   }
   return labels[metric]
 }
@@ -63,6 +66,12 @@ export const MetricSelect = ({
           className="text-slate-200 focus:bg-slate-200 focus:text-black"
         >
           {getMetricLabel(Metric.OPERATIONS)}
+        </SelectItem>
+        <SelectItem
+          value={Metric.ITERATIONS}
+          className="text-slate-200 focus:bg-slate-200 focus:text-black"
+        >
+          {getMetricLabel(Metric.ITERATIONS)}
         </SelectItem>
         <SelectItem
           value={Metric.MEMORY}
