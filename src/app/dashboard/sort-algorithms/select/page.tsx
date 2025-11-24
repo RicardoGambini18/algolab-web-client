@@ -79,6 +79,96 @@ export default function SortAlgorithmsSelect() {
     </>
   )
 
+  const helpDialog = {
+    title: 'Guía de selección',
+    content: (
+      <div className="space-y-5 text-sm">
+        <section className="space-y-2">
+          <p className="text-slate-300">
+            En este paso defines los participantes del experimento.
+          </p>
+          <p className="text-slate-300">
+            El objetivo es contrastar diferentes enfoques lógicos. Al
+            seleccionar múltiples algoritmos, podrás ejecutar una carrera en
+            tiempo real para determinar cuál organiza los datos más rápido y con
+            menor consumo de recursos.
+          </p>
+        </section>
+        <section className="space-y-2">
+          <h3 className="text-base font-semibold text-white">
+            Diferencia de Complejidades
+          </h3>
+          <p className="text-slate-300">
+            Cada algoritmo tiene una &quot;personalidad&quot; matemática.
+            Encontrarás desde métodos sencillos pero costosos (generalmente
+            marcados en <span className="text-red-400 font-medium">rojo</span> o{' '}
+            <span className="text-yellow-400 font-medium">amarillo</span>) hasta
+            estrategias avanzadas de &quot;divide y vencerás&quot; (marcadas en{' '}
+            <span className="text-green-400 font-medium">verde</span>).
+          </p>
+          <p className="text-slate-300">
+            Mezclar ambos tipos hará evidente la brecha de eficiencia en las
+            gráficas.
+          </p>
+        </section>
+        <section className="space-y-2">
+          <h3 className="text-base font-semibold text-white">
+            El impacto de la Estructura
+          </h3>
+          <p className="text-slate-300">
+            No es lo mismo ordenar con acceso libre a cualquier posición que
+            hacerlo bajo restricciones estrictas (como acceso solo al inicio o
+            al final).
+          </p>
+          <p className="text-slate-300">
+            Observa cómo la naturaleza de la estructura de datos obliga a
+            ciertos algoritmos a realizar muchas más operaciones para lograr el
+            mismo resultado.
+          </p>
+        </section>
+        <section className="space-y-2">
+          <h3 className="text-base font-semibold text-white">
+            ¿Qué observar en los resultados?
+          </h3>
+          <ul className="list-disc pl-5 text-slate-300 space-y-2">
+            <li className="leading-relaxed">
+              <span className="font-medium text-white block">
+                Tiempo vs. Operaciones:
+              </span>
+              Un algoritmo puede hacer menos operaciones pero tardar más tiempo
+              si la estructura de datos es lenta de manipular.
+            </li>
+            <li className="leading-relaxed">
+              <span className="font-medium text-white block">
+                Costo de Memoria:
+              </span>
+              Revisa la &quot;Complejidad Espacial&quot; en las tarjetas.
+              Algunos algoritmos ordenan &quot;en su sitio&quot; (in-place),
+              mientras que otros necesitan duplicar la memoria para funcionar.
+            </li>
+          </ul>
+        </section>
+        <div className="rounded-lg border border-yellow-400/30 bg-yellow-400/5 p-4 text-yellow-100">
+          <p className="font-semibold text-yellow-300 mb-1 flex items-center gap-2">
+            <span>💡</span> Tip del Laboratorio
+          </p>
+          <p className="text-yellow-100/90 leading-relaxed">
+            Para un análisis rico, selecciona siempre al menos un algoritmo con
+            complejidad alta (ej.{' '}
+            <code className="font-mono text-xs bg-yellow-400/20 px-1 rounded">
+              O(n²)
+            </code>
+            ) y uno con complejidad baja (ej.{' '}
+            <code className="font-mono text-xs bg-green-400/20 px-1 rounded">
+              O(n log n)
+            </code>
+            ) para validar visualmente la teoría Big-O.
+          </p>
+        </div>
+      </div>
+    ),
+  }
+
   if (isLoading) {
     return (
       <HeaderLayout
@@ -130,17 +220,10 @@ export default function SortAlgorithmsSelect() {
     <HeaderLayout
       backUrl="/dashboard"
       rightElement={buttons}
+      helpDialog={helpDialog}
       title="Algoritmos de Ordenamiento"
       subtitle="Paso 1: Selección de algoritmos"
     >
-      <div className="mb-8">
-        <h2 className="text-xl md:text-2xl font-bold text-white mb-2">
-          Selecciona los algoritmos a comparar
-        </h2>
-        <p className="text-slate-400">
-          Elige uno o más algoritmos para analizar su rendimiento
-        </p>
-      </div>
       <div className="space-y-6">
         {dataStructures.map((dataStructure) => (
           <DataStructureSection

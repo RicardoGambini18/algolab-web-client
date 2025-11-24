@@ -53,6 +53,18 @@ export const getSearchDataStructures = async () => {
   return data
 }
 
+export const getDashboardDataStructures = async () => {
+  const [sortStructures, searchStructures] = await Promise.all([
+    getSortDataStructures(),
+    getSearchDataStructures(),
+  ])
+
+  return {
+    sort: sortStructures.map(({ name }) => name),
+    search: searchStructures.map(({ name }) => name),
+  }
+}
+
 export const getSearchResults = async (input: GetSearchResultsInput) => {
   const { movieIds, algorithms, includeResult } = input
 

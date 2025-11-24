@@ -1,9 +1,17 @@
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, Info } from 'lucide-react'
 import Link from 'next/link'
 import { type ReactNode } from 'react'
 
 import { Logo } from '~/components/logo'
 import { Button } from '~/components/ui/button'
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '~/components/ui/dialog'
 
 interface HeaderLayoutProps {
   title?: string
@@ -11,6 +19,12 @@ interface HeaderLayoutProps {
   subtitle?: string
   children: ReactNode
   rightElement?: ReactNode
+  helpDialog?: {
+    title: string
+    content: ReactNode
+    triggerLabel?: string
+    confirmLabel?: string
+  }
 }
 
 export function HeaderLayout({
@@ -18,8 +32,43 @@ export function HeaderLayout({
   children,
   subtitle,
   rightElement,
+  helpDialog,
   title = 'Algolab',
 }: Readonly<HeaderLayoutProps>) {
+  const HelpButton = helpDialog ? (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button
+          size="sm"
+          variant="outline"
+          className="border-slate-600 text-slate-300 hover:bg-slate-800 hover:text-white bg-transparent gap-2"
+        >
+          <Info className="w-4 h-4" />
+          <span className="hidden md:inline">
+            {helpDialog.triggerLabel ?? 'Sobre este paso'}
+          </span>
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="bg-slate-900 text-slate-100 border-slate-700 w-full max-w-[calc(100%-3rem)] sm:max-w-2xl max-h-[calc(100vh-3rem)] overflow-y-auto py-6 sm:py-8 px-6 sm:px-10 sm:max-h-[85vh] rounded-2xl shadow-2xl">
+        <DialogHeader>
+          <DialogTitle className="text-xl text-white">
+            {helpDialog.title}
+          </DialogTitle>
+        </DialogHeader>
+        <div className="space-y-4 text-slate-200 leading-relaxed">
+          {helpDialog.content}
+        </div>
+        <div className="pt-4 flex justify-end">
+          <DialogClose asChild>
+            <Button className="w-full sm:w-auto bg-yellow-400 text-slate-900 font-semibold hover:bg-yellow-300">
+              {helpDialog.confirmLabel ?? 'Entendido'}
+            </Button>
+          </DialogClose>
+        </div>
+      </DialogContent>
+    </Dialog>
+  ) : null
+
   return (
     <div className="h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex flex-col">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -27,7 +76,7 @@ export function HeaderLayout({
         <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
       </div>
       <header className="border-b border-slate-700/50 glass-light bg-slate-900/30 flex-shrink-0 relative z-20">
-        <div className="container mx-auto px-4 py-4 gap-3 h-[76px] flex items-center justify-between max-w-[960px]">
+        <div className="container mx-auto px-4 gap-3 h-[76px] flex items-center justify-between max-w-[960px]">
           <div className="flex items-center gap-3 min-w-0 flex-1">
             {backUrl && (
               <Link href={backUrl}>
@@ -44,16 +93,19 @@ export function HeaderLayout({
               <Logo className="w-10 h-10" />
             </div>
             <div className="min-w-0 flex-1">
-              <h1 className="text-lg md:text-xl font-bold text-white truncate">
+              <h1 className="text-base md:text-lg leading-tight font-bold text-white truncate">
                 {title}
               </h1>
               {subtitle && (
-                <p className="text-xs text-slate-400 truncate">{subtitle}</p>
+                <p className="text-xs md:text-sm text-slate-300 leading-tight truncate">
+                  {subtitle}
+                </p>
               )}
             </div>
           </div>
-          {rightElement && (
+          {(HelpButton || rightElement) && (
             <div className="flex items-center gap-3 flex-shrink-0">
+              {HelpButton}
               {rightElement}
             </div>
           )}

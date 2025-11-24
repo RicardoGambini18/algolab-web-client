@@ -81,6 +81,80 @@ export default function SearchAlgorithmsSelectAlgorithms() {
     </>
   )
 
+  const helpDialog = {
+    title: 'Estrategias de búsqueda',
+    content: (
+      <div className="space-y-5 text-sm">
+        <section className="space-y-2">
+          <p className="text-slate-300">
+            Ya definiste &quot;qué&quot; buscar, ahora decide &quot;cómo&quot;
+            hacerlo.
+          </p>
+          <p className="text-slate-300">
+            En este paso seleccionas los competidores. Tu elección determinará
+            si el sistema revisa dato por dato (fuerza bruta) o si utiliza
+            atajos matemáticos para encontrar el objetivo instantáneamente.
+          </p>
+        </section>
+        <section className="space-y-2">
+          <h3 className="text-base font-semibold text-white">
+            Dime el color y te diré la velocidad
+          </h3>
+          <p className="text-slate-300">
+            Observa las etiquetas de complejidad. Los algoritmos marcados en{' '}
+            <span className="text-red-400 font-medium">rojo</span> o{' '}
+            <span className="text-yellow-400 font-medium">amarillo</span> suelen
+            revisar elemento por elemento. Los marcados en{' '}
+            <span className="text-green-400 font-medium">verde</span> utilizan
+            estrategias avanzadas para descartar grandes porciones de datos en
+            cada paso.
+          </p>
+        </section>
+        <section className="space-y-2">
+          <h3 className="text-base font-semibold text-white">
+            El límite lo pone la estructura
+          </h3>
+          <p className="text-slate-300">
+            ¿Por qué algunos algoritmos parecen lentos obligatoriamente?
+          </p>
+          <p className="text-slate-300">
+            Ciertas estructuras de datos restringen el movimiento (solo permiten
+            entrar/salir por un extremo), lo que <strong>anula</strong> la
+            posibilidad de usar atajos. En esos casos, la única opción es
+            recorrer todo el camino{' '}
+            <code className="font-mono text-xs bg-slate-700 px-1 rounded">
+              O(n)
+            </code>
+            , sin importar cuán ordenados estén los datos.
+          </p>
+        </section>
+        <section className="space-y-2">
+          <h3 className="text-base font-semibold text-white">
+            Impacto en los resultados
+          </h3>
+          <p className="text-slate-300">
+            En listas grandes, la diferencia es matemática pura. Un algoritmo de
+            revisión completa puede necesitar miles de operaciones, mientras que
+            uno de acceso directo o predictivo podría encontrar el mismo dato en
+            menos de 15 intentos.
+          </p>
+        </section>
+        <div className="rounded-lg border border-yellow-400/30 bg-yellow-400/5 p-4 text-yellow-100">
+          <p className="font-semibold text-yellow-300 mb-1 flex items-center gap-2">
+            <span>💡</span> Tip del Laboratorio
+          </p>
+          <p className="text-yellow-100/90 leading-relaxed">
+            Para una comparativa rica, intenta seleccionar al menos una opción
+            con complejidad alta (<span className="text-red-300">roja</span>/
+            <span className="text-yellow-300">amarilla</span>) y una con
+            complejidad baja (<span className="text-green-300">verde</span>).
+            Así podrás validar visualmente la teoría Big-O.
+          </p>
+        </div>
+      </div>
+    ),
+  }
+
   useEffect(() => {
     if (selectedMovieIds.length === 0) {
       router.push('/dashboard/search-algorithms/select-movies')
@@ -137,18 +211,11 @@ export default function SearchAlgorithmsSelectAlgorithms() {
   return (
     <HeaderLayout
       rightElement={buttons}
+      helpDialog={helpDialog}
       title="Algoritmos de Búsqueda"
       subtitle="Paso 2: Selección de algoritmos"
       backUrl="/dashboard/search-algorithms/select-movies"
     >
-      <div className="mb-8">
-        <h2 className="text-xl md:text-2xl font-bold text-white mb-2">
-          Selecciona los algoritmos a comparar
-        </h2>
-        <p className="text-slate-400">
-          Elige uno o más algoritmos para analizar su rendimiento
-        </p>
-      </div>
       <div className="space-y-6">
         {dataStructures.map((dataStructure) => (
           <DataStructureSection

@@ -39,10 +39,12 @@ export function SortedMovieCheckbox({
         }
       }}
     >
-      <div className="flex-shrink-0 flex items-center justify-center px-2 min-w-12 h-12 bg-slate-900/50 rounded-lg border border-slate-700">
-        <span className="text-lg font-bold text-yellow-400">#{index + 1}</span>
+      <div className="flex-shrink-0 flex items-center justify-center px-2 min-w-10 h-10 md:min-w-12 md:h-12 bg-slate-900/50 rounded-lg border border-slate-700">
+        <span className="text-base md:text-lg font-bold text-yellow-400">
+          #{index + 1}
+        </span>
       </div>
-      <div className="flex-shrink-0 w-[90px] h-[135px] relative rounded overflow-hidden bg-slate-700">
+      <div className="hidden md:block flex-shrink-0 w-[90px] h-[135px] relative rounded overflow-hidden bg-slate-700">
         {showImagePlaceholder ? (
           <div className="flex items-center justify-center w-full h-full">
             <ImageIcon className="text-slate-400 w-8 h-8" />
@@ -67,7 +69,7 @@ export function SortedMovieCheckbox({
             <span className="text-sm font-semibold text-white">
               {movie.vote_average.toFixed(1)}
             </span>
-            <span className="text-xs text-slate-400">
+            <span className="hidden md:inline text-xs text-slate-400">
               ({movie.vote_count.toLocaleString()})
             </span>
           </div>
