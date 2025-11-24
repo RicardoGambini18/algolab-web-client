@@ -8,7 +8,7 @@ Algolab Web Client es una interfaz de usuario moderna y reutilizable construida 
 - **Generación de sitios estáticos (SSG)** para fácil despliegue
 - **Reutilizable** con cualquier backend que implemente los endpoints requeridos
 - **Autenticación JWT** integrada
-- **Visualización de métricas** de algoritmos (tiempo, memoria, comparaciones)
+- **Visualización de métricas** de algoritmos (tiempo, memoria, operaciones e iteraciones)
 - **Soporte para algoritmos de búsqueda y ordenamiento**
 - **Tema claro/oscuro** configurable
 
@@ -145,7 +145,8 @@ Para que este frontend funcione correctamente, el backend debe implementar los s
   metrics: {
     time: number
     memory: number
-    comparisons: number
+    operations: number
+    iterations: number
   }
   sorted_data?: Movie[]  // Solo si include_result=true
   item_found?: Movie | null  // Solo para búsqueda
@@ -154,7 +155,8 @@ Para que este frontend funcione correctamente, el backend debe implementar los s
   sub_metrics?: Array<{  // Solo para búsqueda con múltiples películas
     time: number
     memory: number
-    comparisons: number
+    operations: number
+    iterations: number
     item_found_position?: number | null
   }>
 }
