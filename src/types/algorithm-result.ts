@@ -1,13 +1,13 @@
 export enum Metric {
   TIME = 'time',
   MEMORY = 'memory',
-  COMPARISONS = 'comparisons',
+  OPERATIONS = 'operations',
 }
 
 type AlgorithmMetric = {
   time: number
   memory: number
-  comparisons: number
+  operations: number
 }
 
 type SubAlgorithmMetric = AlgorithmMetric & {

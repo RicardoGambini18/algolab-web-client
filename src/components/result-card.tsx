@@ -84,12 +84,12 @@ export const ResultCard = ({
           </div>
           <div className="glass-light bg-slate-900/30 p-4 rounded-lg flex flex-col justify-between">
             <p className="text-xs text-slate-400 mb-1">
-              {getMetricLabel(Metric.COMPARISONS, hasSubMetrics)}
+              {getMetricLabel(Metric.OPERATIONS, hasSubMetrics)}
             </p>
             <p className="text-xl font-bold text-white">
               {getMetricValue(
-                Metric.COMPARISONS,
-                Math.round(result.metrics.comparisons)
+                Metric.OPERATIONS,
+                Math.round(result.metrics.operations)
               )}
             </p>
           </div>
@@ -158,12 +158,12 @@ export const ResultCard = ({
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-2 text-xs">
                         <div>
                           <span className="text-slate-500">
-                            {getMetricLabel(Metric.COMPARISONS)}:
+                            {getMetricLabel(Metric.OPERATIONS)}:
                           </span>
                           <span className="text-slate-300 ml-1">
                             {getMetricValue(
-                              Metric.COMPARISONS,
-                              Math.round(individualResult.comparisons)
+                              Metric.OPERATIONS,
+                              Math.round(individualResult.operations)
                             )}
                           </span>
                         </div>

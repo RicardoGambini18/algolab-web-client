@@ -112,10 +112,10 @@ export default function SortAlgorithmsResults() {
       <div className="space-y-4">
         {sortedResults.map((result, index) => (
           <ResultCard
-            key={result.algorithm}
-            result={result}
             index={index}
+            result={result}
             selectedMetric={selectedMetric}
+            key={`${result.algorithm}-${result.data_structure}`}
           />
         ))}
       </div>

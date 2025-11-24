@@ -118,8 +118,8 @@ export default function SortAlgorithmsResults() {
           <ResultCard
             index={index}
             result={result}
-            key={result.algorithm}
             selectedMetric={selectedMetric}
+            key={`${result.algorithm}-${result.data_structure}`}
           />
         ))}
       </div>

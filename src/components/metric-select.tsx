@@ -20,9 +20,9 @@ export const getMetricLabel = (metric: Metric, isAverage = false) => {
     [Metric.TIME]: isAverage
       ? 'Tiempo de ejecución promedio'
       : 'Tiempo de ejecución',
-    [Metric.COMPARISONS]: isAverage
-      ? 'Número de comparaciones promedio'
-      : 'Número de comparaciones',
+    [Metric.OPERATIONS]: isAverage
+      ? 'Número de operaciones promedio'
+      : 'Número de operaciones',
   }
   return labels[metric]
 }
@@ -59,10 +59,10 @@ export const MetricSelect = ({
           {getMetricLabel(Metric.TIME)}
         </SelectItem>
         <SelectItem
-          value={Metric.COMPARISONS}
+          value={Metric.OPERATIONS}
           className="text-slate-200 focus:bg-slate-200 focus:text-black"
         >
-          {getMetricLabel(Metric.COMPARISONS)}
+          {getMetricLabel(Metric.OPERATIONS)}
         </SelectItem>
         <SelectItem
           value={Metric.MEMORY}

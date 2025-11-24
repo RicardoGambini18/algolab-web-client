@@ -94,8 +94,8 @@ export const getSearchResults = async (input: GetSearchResultsInput) => {
       subResults.reduce((acc, curr) => acc + curr.metrics.memory, 0) /
       subResults.length
 
-    const averageComparisons =
-      subResults.reduce((acc, curr) => acc + curr.metrics.comparisons, 0) /
+    const averageOperations =
+      subResults.reduce((acc, curr) => acc + curr.metrics.operations, 0) /
       subResults.length
 
     results.push({
@@ -107,7 +107,7 @@ export const getSearchResults = async (input: GetSearchResultsInput) => {
       metrics: {
         time: averageTime,
         memory: averageMemory,
-        comparisons: averageComparisons,
+        operations: averageOperations,
       },
     })
   }
