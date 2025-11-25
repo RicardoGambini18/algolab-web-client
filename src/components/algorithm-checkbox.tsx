@@ -1,6 +1,4 @@
-import 'katex/dist/katex.min.css'
-import { InlineMath } from 'react-katex'
-
+import { ComplexityBadge } from '~/components/complexity-badge'
 import { Badge } from '~/components/ui/badge'
 import { Checkbox } from '~/components/ui/checkbox'
 import { type Algorithm } from '~/types/data-structure'
@@ -9,14 +7,6 @@ interface AlgorithmCheckboxProps {
   isSelected: boolean
   algorithm: Algorithm
   onToggle: (algorithmKey: string) => void
-}
-
-function renderMathExpression(expression: string) {
-  try {
-    return <InlineMath math={expression} />
-  } catch {
-    return <span>{expression}</span>
-  }
 }
 
 export function AlgorithmCheckbox({
@@ -60,52 +50,28 @@ export function AlgorithmCheckbox({
             {algorithm.description}
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <div className="space-y-2">
+            <div className="border border-slate-700/50 rounded-lg p-3 bg-slate-800/30 space-y-2">
               <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-wide">
                 Complejidad Temporal
               </h4>
-              <div className="space-y-1.5">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-slate-400">Mejor caso:</span>
-                  <Badge
-                    variant="outline"
-                    className="border-green-500/50 text-green-400 bg-green-500/10"
-                  >
-                    {renderMathExpression(algorithm.best_time_complexity)}
-                  </Badge>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-slate-400">Caso promedio:</span>
-                  <Badge
-                    variant="outline"
-                    className="border-yellow-500/50 text-yellow-400 bg-yellow-500/10"
-                  >
-                    {renderMathExpression(algorithm.average_time_complexity)}
-                  </Badge>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-slate-400">Peor caso:</span>
-                  <Badge
-                    variant="outline"
-                    className="border-red-500/50 text-red-400 bg-red-500/10"
-                  >
-                    {renderMathExpression(algorithm.worst_time_complexity)}
-                  </Badge>
-                </div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-slate-400">Notación Big-O:</span>
+                <ComplexityBadge
+                  expression={algorithm.time_complexity}
+                  complexity={algorithm.time_complexity_level}
+                />
               </div>
             </div>
-            <div className="space-y-2">
+            <div className="border border-slate-700/50 rounded-lg p-3 bg-slate-800/30 space-y-2">
               <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-wide">
                 Complejidad Espacial
               </h4>
               <div className="flex items-center justify-between">
-                <span className="text-sm text-slate-400">Caso promedio:</span>
-                <Badge
-                  variant="outline"
-                  className="border-blue-500/50 text-blue-400 bg-blue-500/10"
-                >
-                  {renderMathExpression(algorithm.space_complexity)}
-                </Badge>
+                <span className="text-sm text-slate-400">Notación Big-O:</span>
+                <ComplexityBadge
+                  expression={algorithm.space_complexity}
+                  complexity={algorithm.space_complexity_level}
+                />
               </div>
             </div>
           </div>

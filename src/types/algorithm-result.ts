@@ -5,6 +5,12 @@ export enum Metric {
   ITERATIONS = 'iterations',
 }
 
+export enum ComplexityLevel {
+  HIGH = 'high',
+  MEDIUM = 'medium',
+  LOW = 'low',
+}
+
 type AlgorithmMetric = {
   time: number
   memory: number
@@ -23,7 +29,9 @@ export interface AlgorithmResult<T = object> {
   needs_sort?: boolean
   item_found?: T | null
   data_structure: string
+  time_complexity: string
   metrics: AlgorithmMetric
   sub_metrics?: SubAlgorithmMetric[]
   item_found_position?: number | null
+  time_complexity_level: ComplexityLevel
 }

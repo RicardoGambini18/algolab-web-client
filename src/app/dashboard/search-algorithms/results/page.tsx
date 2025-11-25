@@ -1,6 +1,7 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
+import { GitBranch, Package } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useMemo, useState } from 'react'
 import { toast } from 'sonner'
@@ -11,6 +12,7 @@ import { HeaderLayout } from '~/components/header-layout'
 import { LoadingState } from '~/components/loading-state'
 import { MetricSelect } from '~/components/metric-select'
 import { ResultCard } from '~/components/result-card'
+import { Badge } from '~/components/ui/badge'
 import { useAppStore } from '~/lib/app-store'
 import { formatNumber } from '~/lib/format'
 import { Metric } from '~/types/algorithm-result'
@@ -61,14 +63,14 @@ export default function SortAlgorithmsResults() {
   }, [selectedAlgorithms, selectedMovieIds, router])
 
   const helpDialog = {
+    triggerLabel: 'Guía de métricas',
     title: 'Interpretación del Informe',
     content: (
       <div className="space-y-5 text-sm">
         <section className="space-y-2">
           <p className="text-slate-300">
-            Has completado el experimento. Este informe clasifica a los
-            algoritmos analizando su desempeño desde cuatro dimensiones
-            distintas.
+            Este informe presenta el rendimiento promedio de cada algoritmo al
+            buscar todas las películas que seleccionaste.
           </p>
         </section>
         <section className="space-y-2">
@@ -78,35 +80,37 @@ export default function SortAlgorithmsResults() {
           <ul className="list-disc pl-5 text-slate-300 space-y-2">
             <li className="leading-relaxed">
               <span className="font-medium text-white block">
-                Tiempo de ejecución:
+                Tiempo promedio:
               </span>
-              La velocidad real en tu procesador. Es lo que percibe el usuario
-              final, aunque puede variar según la carga de tu PC.
+              Cuánto tardó el algoritmo, en promedio, en encontrar uno de tus
+              objetivos. Los algoritmos inteligentes (verdes) suelen ser casi
+              instantáneos (µs).
             </li>
             <li className="leading-relaxed">
               <span className="font-medium text-white block">
                 Número de operaciones:
               </span>
-              El &quot;esfuerzo&quot; teórico. Cuenta cuántas comparaciones,
-              lecturas o movimientos realizó el algoritmo. Es la métrica más
-              pura para validar la complejidad Big-O.
+              Cuántas comparaciones o movimientos hizo para llegar al dato. Aquí
+              verás la diferencia masiva entre revisar todo (Lineal) y usar
+              atajos (Binaria).
             </li>
             <li className="leading-relaxed">
               <span className="font-medium text-white block">
                 Número de iteraciones:
               </span>
-              La cantidad de ciclos o vueltas que dio el algoritmo. Un número
-              bajo aquí suele indicar estrategias inteligentes (como saltos
-              logarítmicos) frente a la fuerza bruta.
+              Cuántos ciclos necesitó. En búsqueda binaria, este número es
+              pequeñísimo (logarítmico) comparado con la búsqueda lineal.
             </li>
             <li className="leading-relaxed">
               <span className="font-medium text-white block">
                 Uso de memoria:
               </span>
-              Indica cuánta RAM adicional necesitó el algoritmo para funcionar.
-              Es vital para distinguir algoritmos que ordenan &quot;en su
-              lugar&quot; (in-place) de aquellos que requieren copias auxiliares
-              costosas[cite: 25, 48].
+              Clave para diferenciar estructuras. Mientras la búsqueda en Vector
+              casi no usa memoria extra, buscar en{' '}
+              <strong className="text-white">Pila</strong> o{' '}
+              <strong className="text-white">Cola</strong> dispara este valor
+              porque necesitan estructuras auxiliares para no perder los datos
+              al recorrerlos.
             </li>
           </ul>
         </section>
@@ -115,10 +119,10 @@ export default function SortAlgorithmsResults() {
             Analizando al Ganador (#1)
           </h3>
           <p className="text-slate-300">
-            El algoritmo en la primera posición logró el mejor balance según el
-            criterio de ordenamiento que elijas. Recuerda: el más rápido no
-            siempre es el mejor si consume demasiada memoria. Busca el
-            equilibrio entre velocidad y recursos.
+            El algoritmo #1 fue el más eficaz encontrando tus objetivos. Si ves
+            que el ganador es una Búsqueda Binaria o de Interpolación, estás
+            confirmando que el acceso aleatorio (Vectores) es muy superior al
+            acceso restringido (Pilas/Colas) para tareas de recuperación.
           </p>
         </section>
       </div>
@@ -165,20 +169,29 @@ export default function SortAlgorithmsResults() {
     >
       <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div className="min-w-0 flex-1">
-          <h2 className="text-xl md:text-2xl font-bold text-white mb-2 truncate">
+          <h2 className="text-xl md:text-2xl font-bold text-white mb-3 truncate">
             Informe de Rendimiento
           </h2>
-          <p className="text-sm md:text-base text-slate-400">
-            Análisis comparativo de{' '}
-            <span className="font-medium text-white">
-              {results?.length} algoritmos
-            </span>{' '}
-            sobre{' '}
-            <span className="font-medium text-white">
-              {formatNumber(results?.at(0)?.item_count ?? 0)} elementos
-            </span>
-            .
-          </p>
+          <div className="flex flex-wrap items-center gap-2">
+            <Badge
+              variant="outline"
+              className="glass border-slate-500/40 bg-slate-800/40 backdrop-blur-sm text-slate-200 px-3 py-1.5 text-sm shadow-lg shadow-black/20 hover:bg-slate-800/60 hover:border-slate-400/50 transition-all [&>svg]:size-3.5"
+            >
+              <GitBranch className="mr-1.5" />
+              <span className="font-medium">
+                {results?.length ?? 0} Algoritmos
+              </span>
+            </Badge>
+            <Badge
+              variant="outline"
+              className="glass border-slate-500/40 bg-slate-800/40 backdrop-blur-sm text-slate-200 px-3 py-1.5 text-sm shadow-lg shadow-black/20 hover:bg-slate-800/60 hover:border-slate-400/50 transition-all [&>svg]:size-3.5"
+            >
+              <Package className="mr-1.5" />
+              <span className="font-medium">
+                {formatNumber(results?.at(0)?.item_count ?? 0)} Elementos
+              </span>
+            </Badge>
+          </div>
         </div>
         <div className="flex items-center gap-3 flex-shrink-0">
           <MetricSelect

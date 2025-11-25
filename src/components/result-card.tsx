@@ -1,5 +1,6 @@
 import { Award, Medal, Trophy } from 'lucide-react'
 
+import { ComplexityBadge } from '~/components/complexity-badge'
 import {
   Accordion,
   AccordionContent,
@@ -8,7 +9,6 @@ import {
 } from '~/components/ui/accordion'
 import { Badge } from '~/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '~/components/ui/card'
-import { formatNumber } from '~/lib/format'
 import { type AlgorithmResult, Metric } from '~/types/algorithm-result'
 
 import { getMetricLabel, getMetricValue } from './metric-select'
@@ -77,10 +77,13 @@ export const ResultCard = ({
       <CardContent>
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
           <div className="glass-light bg-slate-900/30 p-4 rounded-lg flex flex-col justify-between">
-            <p className="text-xs text-slate-400 mb-1">Elementos procesados</p>
-            <p className="text-xl font-bold text-white">
-              {formatNumber(result.item_count)}
-            </p>
+            <p className="text-xs text-slate-400 mb-2">Complejidad Temporal</p>
+            <div className="flex">
+              <ComplexityBadge
+                expression={result.time_complexity}
+                complexity={result.time_complexity_level}
+              />
+            </div>
           </div>
           <div className="glass-light bg-slate-900/30 p-4 rounded-lg flex flex-col justify-between">
             <p className="text-xs text-slate-400 mb-1">

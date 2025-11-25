@@ -1,12 +1,14 @@
+import { ComplexityLevel } from '~/types/algorithm-result'
+
 export interface Algorithm {
   key: string
   name: string
   description: string
   needs_sort?: boolean
+  time_complexity: string
   space_complexity: string
-  best_time_complexity: string
-  worst_time_complexity: string
-  average_time_complexity: string
+  time_complexity_level: ComplexityLevel
+  space_complexity_level: ComplexityLevel
 }
 
 export interface DataStructure {
