@@ -169,7 +169,7 @@ export default function SortAlgorithmsResults() {
       containerClassName="px-0"
     >
       <div
-        className="sticky top-0 z-10 mb-7 pb-7 bg-slate-900/30 backdrop-blur-md border-b border-slate-700/50 -mt-12 pt-12"
+        className="sticky top-0 z-10 mb-4 pb-4 md:mb-7 md:pb-7 bg-gradient-to-b from-slate-900/50 to-transparent backdrop-blur-md -mt-12 pt-12"
         style={{
           marginLeft: 'calc(-50vw + 50%)',
           marginRight: 'calc(-50vw + 50%)',
