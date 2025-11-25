@@ -31,6 +31,7 @@ export default function SearchAlgorithmsSelectMovies() {
     scrollToPosition,
     setJumpToPosition,
     handleJumpToPosition,
+    clearSelectedMovieIds,
     getSelectedMoviesCount,
   } = useSelectMovies()
 
@@ -188,10 +189,12 @@ export default function SearchAlgorithmsSelectMovies() {
         jumpToPosition={jumpToPosition}
         maxPosition={movies?.length ?? 0}
         onJumpToPosition={handleJumpToPosition}
+        onClearSelection={clearSelectedMovieIds}
         onJumpToPositionChange={setJumpToPosition}
         onScrollToEnd={() => scrollToPosition('end')}
         onScrollToStart={() => scrollToPosition('start')}
         onScrollToMiddle={() => scrollToPosition('middle')}
+        disabledClearSelection={getSelectedMoviesCount() === 0}
       />
       <div
         ref={containerRef}

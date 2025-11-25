@@ -31,6 +31,7 @@ interface AppStore {
   }
   searchAlgorithms: {
     selectedMovieIds: number[]
+    clearSelectedMovieIds: () => void
     getSelectedMoviesCount: () => number
     toggleMovie: (movieId: number) => void
     isMovieSelected: (movieId: number) => boolean
@@ -166,6 +167,14 @@ export const appStore = create<AppStore>()(
         },
         isMovieSelected: (movieId: number) => {
           return get().searchAlgorithms.selectedMovieIds.includes(movieId)
+        },
+        clearSelectedMovieIds: () => {
+          set({
+            searchAlgorithms: {
+              ...get().searchAlgorithms,
+              selectedMovieIds: [],
+            },
+          })
         },
         toggleMovie: (movieId: number) => {
           const { selectedMovieIds, isMovieSelected } = get().searchAlgorithms

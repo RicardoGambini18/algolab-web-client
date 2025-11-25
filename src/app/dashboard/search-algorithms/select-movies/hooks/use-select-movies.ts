@@ -14,9 +14,12 @@ export const useSelectMovies = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const [jumpToPosition, setJumpToPosition] = useState('')
 
-  const { toggleMovie, isMovieSelected, getSelectedMoviesCount } = useAppStore(
-    (state) => state.searchAlgorithms
-  )
+  const {
+    toggleMovie,
+    isMovieSelected,
+    clearSelectedMovieIds,
+    getSelectedMoviesCount,
+  } = useAppStore((state) => state.searchAlgorithms)
 
   const {
     error,
@@ -99,6 +102,7 @@ export const useSelectMovies = () => {
     scrollToPosition,
     setJumpToPosition,
     handleJumpToPosition,
+    clearSelectedMovieIds,
     getSelectedMoviesCount,
   }
 }
