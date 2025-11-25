@@ -119,7 +119,7 @@ export function HeaderLayout({
       <main className="flex-1 overflow-y-auto overflow-x-hidden relative z-10">
         <div
           className={cn(
-            'container mx-auto px-4 py-12 max-w-[960px]',
+            'container mx-auto px-4 py-8 md:py-12 max-w-[960px]',
             containerClassName
           )}
         >
