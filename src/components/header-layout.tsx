@@ -12,6 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '~/components/ui/dialog'
+import { cn } from '~/lib/utils'
 
 interface HeaderLayoutProps {
   title?: string
@@ -19,6 +20,7 @@ interface HeaderLayoutProps {
   subtitle?: string
   children: ReactNode
   rightElement?: ReactNode
+  containerClassName?: string
   helpDialog?: {
     title: string
     content: ReactNode
@@ -34,6 +36,7 @@ export function HeaderLayout({
   rightElement,
   helpDialog,
   title = 'Algolab',
+  containerClassName,
 }: Readonly<HeaderLayoutProps>) {
   const HelpButton = helpDialog ? (
     <Dialog>
@@ -113,8 +116,13 @@ export function HeaderLayout({
           )}
         </div>
       </header>
-      <main className="flex-1 overflow-y-auto relative z-10">
-        <div className="container mx-auto px-4 py-12 max-w-[960px]">
+      <main className="flex-1 overflow-y-auto overflow-x-hidden relative z-10">
+        <div
+          className={cn(
+            'container mx-auto px-4 py-12 max-w-[960px]',
+            containerClassName
+          )}
+        >
           {children}
         </div>
       </main>

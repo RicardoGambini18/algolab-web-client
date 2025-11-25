@@ -167,50 +167,64 @@ export default function SortAlgorithmsResults() {
       title="Algoritmos de Ordenamiento"
       backUrl="/dashboard/sort-algorithms/select"
       subtitle="Paso 2: Comparación de resultados"
+      containerClassName="px-0"
     >
-      <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        <div className="min-w-0 flex-1">
-          <h2 className="text-xl md:text-2xl font-bold text-white mb-3 truncate">
-            Informe de Rendimiento
-          </h2>
-          <div className="flex flex-wrap items-center gap-2">
-            <Badge
-              variant="outline"
-              className="glass border-slate-500/40 bg-slate-800/40 backdrop-blur-sm text-slate-200 px-3 py-1.5 text-sm shadow-lg shadow-black/20 hover:bg-slate-800/60 hover:border-slate-400/50 transition-all [&>svg]:size-3.5"
-            >
-              <GitBranch className="mr-1.5" />
-              <span className="font-medium">
-                {results?.length ?? 0} Algoritmos
-              </span>
-            </Badge>
-            <Badge
-              variant="outline"
-              className="glass border-slate-500/40 bg-slate-800/40 backdrop-blur-sm text-slate-200 px-3 py-1.5 text-sm shadow-lg shadow-black/20 hover:bg-slate-800/60 hover:border-slate-400/50 transition-all [&>svg]:size-3.5"
-            >
-              <Package className="mr-1.5" />
-              <span className="font-medium">
-                {formatNumber(results?.at(0)?.item_count ?? 0)} Elementos
-              </span>
-            </Badge>
+      <div
+        className="sticky top-0 z-10 mb-7 pb-7 bg-slate-900/30 backdrop-blur-md border-b border-slate-700/50 -mt-12 pt-12"
+        style={{
+          marginLeft: 'calc(-50vw + 50%)',
+          marginRight: 'calc(-50vw + 50%)',
+          width: '100vw',
+        }}
+      >
+        <div className="container mx-auto px-4 max-w-[960px]">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div className="min-w-0 flex-1">
+              <h2 className="text-xl md:text-2xl font-bold text-white mb-3 truncate">
+                Informe de Rendimiento
+              </h2>
+              <div className="flex flex-wrap items-center gap-2">
+                <Badge
+                  variant="outline"
+                  className="glass border-slate-500/40 bg-slate-800/40 backdrop-blur-sm text-slate-200 px-3 py-1.5 text-sm shadow-lg shadow-black/20 hover:bg-slate-800/60 hover:border-slate-400/50 transition-all [&>svg]:size-3.5"
+                >
+                  <GitBranch className="mr-1.5" />
+                  <span className="font-medium">
+                    {results?.length ?? 0} Algoritmos
+                  </span>
+                </Badge>
+                <Badge
+                  variant="outline"
+                  className="glass border-slate-500/40 bg-slate-800/40 backdrop-blur-sm text-slate-200 px-3 py-1.5 text-sm shadow-lg shadow-black/20 hover:bg-slate-800/60 hover:border-slate-400/50 transition-all [&>svg]:size-3.5"
+                >
+                  <Package className="mr-1.5" />
+                  <span className="font-medium">
+                    {formatNumber(results?.at(0)?.item_count ?? 0)} Elementos
+                  </span>
+                </Badge>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 flex-shrink-0">
+              <MetricSelect
+                value={selectedMetric}
+                onValueChange={setSelectedMetric}
+                className="w-full md:w-auto"
+              />
+            </div>
           </div>
         </div>
-        <div className="flex items-center gap-3 flex-shrink-0">
-          <MetricSelect
-            value={selectedMetric}
-            onValueChange={setSelectedMetric}
-            className="w-full md:w-auto"
-          />
-        </div>
       </div>
-      <div className="space-y-4">
-        {sortedResults.map((result, index) => (
-          <ResultCard
-            index={index}
-            result={result}
-            selectedMetric={selectedMetric}
-            key={`${result.algorithm}-${result.data_structure}`}
-          />
-        ))}
+      <div className="container mx-auto px-4 max-w-[960px]">
+        <div className="space-y-4">
+          {sortedResults.map((result, index) => (
+            <ResultCard
+              index={index}
+              result={result}
+              selectedMetric={selectedMetric}
+              key={`${result.algorithm}-${result.data_structure}`}
+            />
+          ))}
+        </div>
       </div>
     </HeaderLayout>
   )
