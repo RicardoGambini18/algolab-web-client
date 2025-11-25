@@ -49,16 +49,18 @@ export function HeaderLayout({
           </span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="bg-slate-900 text-slate-100 border-slate-700 w-full max-w-[calc(100%-3rem)] sm:max-w-2xl max-h-[calc(100vh-3rem)] overflow-y-auto py-6 sm:py-8 px-6 sm:px-10 sm:max-h-[85vh] rounded-2xl shadow-2xl">
-        <DialogHeader>
+      <DialogContent className="bg-slate-900 text-slate-100 border-slate-700 w-full max-w-[calc(100%-3rem)] sm:max-w-2xl max-h-[calc(100vh-3rem)] sm:max-h-[85vh] rounded-2xl shadow-2xl flex flex-col p-0 overflow-hidden">
+        <DialogHeader className="px-6 sm:px-6 pt-6 sm:pt-6 pb-4 flex-shrink-0 border-b border-slate-700/50">
           <DialogTitle className="text-xl text-white">
             {helpDialog.title}
           </DialogTitle>
         </DialogHeader>
-        <div className="space-y-4 text-slate-200 leading-relaxed">
-          {helpDialog.content}
+        <div className="flex-1 overflow-y-auto px-6 sm:px-6 py-4">
+          <div className="space-y-4 text-slate-200 leading-relaxed">
+            {helpDialog.content}
+          </div>
         </div>
-        <div className="pt-4 flex justify-end">
+        <div className="px-6 sm:px-6 pt-4 pb-6 sm:pb-6 flex justify-end flex-shrink-0 border-t border-slate-700/50">
           <DialogClose asChild>
             <Button className="w-full sm:w-auto bg-yellow-400 text-slate-900 font-semibold hover:bg-yellow-300">
               {helpDialog.confirmLabel ?? 'Entendido'}
