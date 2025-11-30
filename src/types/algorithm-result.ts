@@ -31,7 +31,9 @@ export interface AlgorithmResult<T = object> {
   data_structure: string
   time_complexity: string
   metrics: AlgorithmMetric
+  space_complexity: string
   sub_metrics?: SubAlgorithmMetric[]
   item_found_position?: number | null
   time_complexity_level: ComplexityLevel
+  space_complexity_level: ComplexityLevel
 }

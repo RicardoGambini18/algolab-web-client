@@ -75,13 +75,22 @@ export const ResultCard = ({
         </div>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
           <div className="glass-light bg-slate-900/30 p-4 rounded-lg flex flex-col justify-between">
             <p className="text-xs text-slate-400 mb-2">Complejidad Temporal</p>
             <div className="flex">
               <ComplexityBadge
                 expression={result.time_complexity}
                 complexity={result.time_complexity_level}
+              />
+            </div>
+          </div>
+          <div className="glass-light bg-slate-900/30 p-4 rounded-lg flex flex-col justify-between">
+            <p className="text-xs text-slate-400 mb-2">Complejidad Espacial</p>
+            <div className="flex">
+              <ComplexityBadge
+                expression={result.space_complexity}
+                complexity={result.space_complexity_level}
               />
             </div>
           </div>
