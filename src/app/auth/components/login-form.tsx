@@ -86,12 +86,12 @@ export const LoginForm = () => {
             control={control}
             render={({ field: { onChange, value, onBlur } }) => (
               <Combobox
+                id="user"
                 allowClear
                 value={value}
                 icon={UserIcon}
                 onBlur={onBlur}
                 options={users}
-                id="user-combobox"
                 className="w-full"
                 onChange={onChange}
                 estimatedOptionSize={52}
