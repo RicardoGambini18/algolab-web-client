@@ -5,6 +5,7 @@ import './src/env'
 const nextConfig: NextConfig = {
   output: 'export',
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         port: '',
