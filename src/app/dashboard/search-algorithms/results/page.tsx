@@ -4,7 +4,6 @@ import { useQuery } from '@tanstack/react-query'
 import { GitBranch, Package } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useMemo, useState } from 'react'
-import { toast } from 'sonner'
 
 import { getSearchResults } from '~/api/movies'
 import { ErrorState } from '~/components/error-state'
@@ -35,16 +34,10 @@ export default function SortAlgorithmsResults() {
     queryKey: ['get-search-results'],
     enabled: selectedAlgorithms.length > 0 && selectedMovieIds.length > 0,
     queryFn: async () => {
-      try {
-        return await getSearchResults({
-          algorithms: selectedAlgorithms,
-          movieIds: selectedMovieIds,
-        })
-      } catch (error) {
-        console.error('Error al obtener resultados:', error)
-        toast.error('Error al obtener resultados')
-        throw error
-      }
+      return await getSearchResults({
+        algorithms: selectedAlgorithms,
+        movieIds: selectedMovieIds,
+      })
     },
   })
 

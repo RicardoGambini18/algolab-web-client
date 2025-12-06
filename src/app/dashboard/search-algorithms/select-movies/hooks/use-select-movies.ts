@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { useVirtualizer } from '@tanstack/react-virtual'
 import { useRef, useState } from 'react'
-import { toast } from 'sonner'
 
 import { getMovies } from '~/api/movies'
 import { useAppStore } from '~/lib/app-store'
@@ -28,15 +27,7 @@ export const useSelectMovies = () => {
     data: movies,
   } = useQuery({
     queryKey: ['get-movies'],
-    queryFn: async () => {
-      try {
-        return await getMovies()
-      } catch (error) {
-        console.error('Error al obtener películas:', error)
-        toast.error('Error al obtener películas')
-        throw error
-      }
-    },
+    queryFn: getMovies,
   })
 
   const virtualizer = useVirtualizer({

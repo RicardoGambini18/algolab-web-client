@@ -3,7 +3,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { ArrowRight, CheckSquare, Info, Square } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { toast } from 'sonner'
 
 import { getSortDataStructures } from '~/api/movies'
 import { AlgorithmCheckbox } from '~/components/algorithm-checkbox'
@@ -33,15 +32,7 @@ export default function SortAlgorithmsSelect() {
     data: dataStructures,
   } = useQuery({
     queryKey: ['get-sort-data-structures'],
-    queryFn: async () => {
-      try {
-        return await getSortDataStructures()
-      } catch (error) {
-        console.error('Error al obtener estructuras de datos:', error)
-        toast.error('Error al obtener estructuras de datos')
-        throw error
-      }
-    },
+    queryFn: getSortDataStructures,
   })
 
   const handleContinue = () => {

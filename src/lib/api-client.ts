@@ -1,4 +1,5 @@
 import axios, { AxiosError } from 'axios'
+import { toast } from 'sonner'
 
 import { env } from '~/env'
 import { appStore } from '~/lib/app-store'
@@ -33,3 +34,26 @@ apiClient.interceptors.response.use(
     )
   }
 )
+
+type ErrorResponse = {
+  error: string
+}
+
+const isErrorResponse = (data: unknown): data is ErrorResponse => {
+  return (
+    typeof data === 'object' &&
+    data !== null &&
+    'error' in data &&
+    typeof data.error === 'string'
+  )
+}
+
+export const handleApiError = (error: unknown) => {
+  let message = 'Error interno del servidor'
+
+  if (error instanceof AxiosError && isErrorResponse(error.response?.data)) {
+    message = error.response.data.error
+  }
+
+  toast.error(message)
+}

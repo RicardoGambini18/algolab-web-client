@@ -2,7 +2,6 @@
 
 import { useQuery } from '@tanstack/react-query'
 import { BarChart3, Search } from 'lucide-react'
-import { toast } from 'sonner'
 
 import { getDashboardDataStructures } from '~/api/movies'
 import { EmptyState } from '~/components/empty-state'
@@ -16,15 +15,7 @@ import { ModuleCard } from './components/module-card'
 export default function Dashboard() {
   const { data, error, refetch, isLoading } = useQuery({
     queryKey: ['dashboard-data-structures'],
-    queryFn: async () => {
-      try {
-        return await getDashboardDataStructures()
-      } catch (error) {
-        console.error('Error al obtener estructuras del dashboard', error)
-        toast.error('Error al obtener estructuras del dashboard')
-        throw error
-      }
-    },
+    queryFn: getDashboardDataStructures,
   })
 
   if (isLoading) {

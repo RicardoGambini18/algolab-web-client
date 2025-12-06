@@ -4,7 +4,6 @@ import { useQuery } from '@tanstack/react-query'
 import { ArrowRight, CheckSquare, Info, Square } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
-import { toast } from 'sonner'
 
 import { getSearchDataStructures } from '~/api/movies'
 import { AlgorithmCheckbox } from '~/components/algorithm-checkbox'
@@ -35,15 +34,7 @@ export default function SearchAlgorithmsSelectAlgorithms() {
     data: dataStructures,
   } = useQuery({
     queryKey: ['get-search-data-structures'],
-    queryFn: async () => {
-      try {
-        return await getSearchDataStructures()
-      } catch (error) {
-        console.error('Error al obtener estructuras de datos:', error)
-        toast.error('Error al obtener estructuras de datos')
-        throw error
-      }
-    },
+    queryFn: getSearchDataStructures,
   })
 
   const handleContinue = () => {

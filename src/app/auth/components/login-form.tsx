@@ -12,7 +12,6 @@ import {
 } from 'lucide-react'
 import { useState } from 'react'
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form'
-import { toast } from 'sonner'
 
 import { getUsers, login } from '~/api/auth'
 import { Combobox } from '~/components/combobox'
@@ -21,6 +20,7 @@ import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
 import { Label } from '~/components/ui/label'
 import { env } from '~/env'
+import { handleApiError } from '~/lib/api-client'
 import { appStore } from '~/lib/app-store'
 import { cn } from '~/lib/utils'
 import { type LoginInput, loginSchema } from '~/validations/auth'
@@ -30,8 +30,7 @@ const onSubmit: SubmitHandler<LoginInput> = async (data) => {
     const { token } = await login(data)
     appStore.getState().auth.login(token)
   } catch (error) {
-    console.error('Error al iniciar sesión:', error)
-    toast.error('Error al iniciar sesión')
+    handleApiError(error)
   }
 }
 
@@ -58,15 +57,7 @@ export const LoginForm = () => {
     isLoading: isUsersLoading,
   } = useQuery({
     queryKey: ['get-users'],
-    queryFn: async () => {
-      try {
-        return await getUsers()
-      } catch (error) {
-        console.error('Error al obtener usuarios:', error)
-        toast.error('Error al obtener usuarios')
-        throw error
-      }
-    },
+    queryFn: getUsers,
   })
 
   return (
