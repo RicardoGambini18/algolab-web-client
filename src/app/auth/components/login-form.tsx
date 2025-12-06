@@ -28,7 +28,7 @@ import { type LoginInput, loginSchema } from '~/validations/auth'
 const onSubmit: SubmitHandler<LoginInput> = async (data) => {
   try {
     const { token } = await login(data)
-    appStore.getState().auth.setToken(token)
+    appStore.getState().auth.login(token)
   } catch (error) {
     console.error('Error al iniciar sesión:', error)
     toast.error('Error al iniciar sesión')

@@ -6,7 +6,7 @@ import { Button } from '~/components/ui/button'
 import { appStore } from '~/lib/app-store'
 
 const handleLogout = () => {
-  appStore.getState().auth.setToken(null)
+  appStore.getState().auth.logout()
 }
 
 export function LogoutButton() {

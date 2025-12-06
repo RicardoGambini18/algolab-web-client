@@ -14,8 +14,10 @@ interface AppStore {
   isHydrated: boolean
   setIsHydrated: (isHydrated: boolean) => void
   auth: {
+    logout: () => void
     token: string | null
-    setToken: (token: string | null) => void
+    login: (token: string) => void
+    isAuthenticated: () => boolean
   }
   sortAlgorithms: {
     selectedAlgorithms: AlgorithmOption[]
@@ -55,8 +57,15 @@ export const appStore = create<AppStore>()(
       setIsHydrated: (isHydrated: boolean) => set({ isHydrated }),
       auth: {
         token: null,
-        setToken: (token: string | null) =>
-          set({ auth: { ...get().auth, token } }),
+        login: (token: string) => set({ auth: { ...get().auth, token } }),
+        isAuthenticated: () => {
+          return !!get().auth.token
+        },
+        logout: () => {
+          if (get().auth.isAuthenticated()) {
+            set({ auth: { ...get().auth, token: null } })
+          }
+        },
       },
       sortAlgorithms: {
         selectedAlgorithms: [],

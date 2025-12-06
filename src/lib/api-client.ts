@@ -23,7 +23,7 @@ apiClient.interceptors.response.use(
   },
   (error) => {
     if (error instanceof AxiosError && error.response?.status === 401) {
-      appStore.getState().auth.setToken(null)
+      appStore.getState().auth.logout()
     }
 
     return Promise.reject(

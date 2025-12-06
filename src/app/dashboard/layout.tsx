@@ -9,7 +9,7 @@ export default function DashboardLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const isAuthenticated = useAppStore((store) => !!store.auth.token)
+  const isAuthenticated = useAppStore((store) => store.auth.isAuthenticated())
 
   if (!isAuthenticated) redirect('/auth')
 
