@@ -14,12 +14,12 @@ import { useState } from 'react'
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form'
 
 import { getUsers, login } from '~/api/auth'
+import { getMetadata } from '~/api/metadata'
 import { Combobox } from '~/components/combobox'
 import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar'
 import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
 import { Label } from '~/components/ui/label'
-import { env } from '~/env'
 import { handleApiError } from '~/lib/api-client'
 import { appStore } from '~/lib/app-store'
 import { cn } from '~/lib/utils'
@@ -58,6 +58,11 @@ export const LoginForm = () => {
   } = useQuery({
     queryKey: ['get-users'],
     queryFn: getUsers,
+  })
+
+  const { data: metadata } = useQuery({
+    queryKey: ['get-metadata'],
+    queryFn: getMetadata,
   })
 
   return (
@@ -151,12 +156,10 @@ export const LoginForm = () => {
           <Label htmlFor="password" className="text-slate-200 font-medium">
             Contraseña
           </Label>
-          {!!env.NEXT_PUBLIC_PASSWORD_HINT && (
+          {!!metadata?.password_hint && (
             <div className="flex items-center gap-1.5">
               <HelpCircle className="h-3.5 w-3.5 text-slate-400" />
-              <p className="text-xs text-slate-400">
-                {env.NEXT_PUBLIC_PASSWORD_HINT}
-              </p>
+              <p className="text-xs text-slate-400">{metadata.password_hint}</p>
             </div>
           )}
           <Controller
@@ -210,10 +213,10 @@ export const LoginForm = () => {
           )}
         </Button>
       </form>
-      {!!env.NEXT_PUBLIC_COURSE && (
+      {!!metadata?.course && (
         <div className="mt-6 text-center">
           <p className="text-slate-400 text-sm">
-            Proyecto final del curso {env.NEXT_PUBLIC_COURSE}
+            Proyecto final del curso {metadata.course}
           </p>
         </div>
       )}
